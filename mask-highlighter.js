@@ -11,8 +11,8 @@ import {html, render} from './node_modules/lit-html/lit-html.js';
  * @property {number} nbLines : the number of lines of the mask
  * @property {number} col : the number of the column (according to COL_WIDTH parameter)
  * @property {number} nbCols : the number of columns of the mask
- * @property {string} topMargin : the top margin position of the rectangle in mask
- * @property {string} leftMargin : the left margin position of the rectangle in mask
+ * @property {string} topMargin : the top margin position of the rectangle in mask (top margin is apply if line is set)
+ * @property {string} leftMargin : the left margin position of the rectangle in mask (left margin is apply if col is set)
  */
 
 
@@ -33,14 +33,14 @@ import {html, render} from './node_modules/lit-html/lit-html.js';
 * * {string} left : the left position of rectangle to apply to area
 * Position Attributes
 * * {number} line : the line number where the rectangle will start
-* * {number} nbLines : the number of line of the rectangle
+* * {number} nb-lines : the number of line of the rectangle
 * * {number} col : the col number where the rectangle will start
-* * {number} nbCols : the number of column of the rectangle
-* * {string} topMargin : the top position before starting counting lines
-* * {string} leftMargin : the left position before starting counting columns
+* * {number} nb-cols : the number of column of the rectangle
+* * {string} top-margin : the top position before starting counting lines (top margin is apply if line is set)
+* * {string} left-margin : the left position before starting counting columns (left margin is apply if col is set)
 * Parameters Attributes
-* * {string} lineHeight : the height of a line if you want to play with lines and cols (Default value is 1.15em)
-* * {string} colWidth : the width of a column if you want to play with lines and cols (Default value is 35px)
+* * {string} line-height : the height of a line if you want to play with lines and cols (Default value is 1.15em)
+* * {string} col-width : the width of a column if you want to play with lines and cols (Default value is 35px)
 */
 export class MaskHighlighter extends HTMLElement {
 	/**
@@ -83,7 +83,7 @@ export class MaskHighlighter extends HTMLElement {
 	set lineHeight(value){
 		if (this._lineHeight === value) return;
 		this._lineHeight = value;
-		this.setAttribute('lineHeight', value);
+		this.setAttribute('line-height', value);
 		this._updateFromPositionAndArea(this.position, this.area);
 	}
 
@@ -98,7 +98,7 @@ export class MaskHighlighter extends HTMLElement {
 	set colWidth(value){
 		if (this._colWidth === value) return;
 		this._colWidth = value;
-		this.setAttribute('colWidth', value);
+		this.setAttribute('col-width', value);
 		this._updateFromPositionAndArea(this.position, this.area);
 	}
 
@@ -124,7 +124,7 @@ export class MaskHighlighter extends HTMLElement {
 			}
 			svg.code rect.mask_area {
 				stroke: none;
-				fill: rgba(63, 63, 63, 0.7);
+				fill: var(--mask-highlighter-bg-color, rgba(63, 63, 63, 0.7));
 				mask: url(#mask);
 				width: 100%;
 				height: 100%;
@@ -211,7 +211,11 @@ export class MaskHighlighter extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this.invalidate();
+		//Bug fix to first rendering
+		setTimeout(() => {
+			this._updateFromPositionAndArea(this.position, this.area);
+		}, 0);
+
 	}
 
 	static get observedAttributes() {
@@ -223,14 +227,14 @@ export class MaskHighlighter extends HTMLElement {
 				'left',
 				// Position Attributes
 				'line',
-				'nbLines',
+				'nb-lines',
 				'col',
-				'nbCols',
-				'topMargin',
-				'leftMargin',
+				'nb-cols',
+				'top-margin',
+				'left-margin',
 				// Parameters Attributes
-				'lineHeight',
-				'colWidth'
+				'line-height',
+				'col-width'
 			];
 	}
 
@@ -251,20 +255,32 @@ export class MaskHighlighter extends HTMLElement {
 				areaTmp[attr] = newValue;
 				this.area = areaTmp;
 				break;
-				case 'line' :
-				case 'nbLines' :
-				case 'col' :
-				case 'nbCols' :
-				case 'topMargin' :
-				case 'leftMargin' :
+			case 'line' :
+			case 'nb-lines' :
+			case 'col' :
+			case 'nb-cols' :
+			case 'top-margin' :
+			case 'left-margin' :
 				if (!this._position) this._position = {};
 				const positionTmp = this.position;
-				positionTmp[attr] = newValue;
+				let attrFinal = attr;
+				if (attr === 'nb-lines'){
+					attrFinal = 'nbLines';
+				}else if(attr === 'nb-cols'){
+					attrFinal = 'nbCols';
+				}else if(attr === 'top-margin'){
+					attrFinal = 'topMargin';
+				}else if(attr === 'left-margin'){
+					attrFinal = 'leftMargin';
+				}
+				positionTmp[attrFinal] = newValue;
 				this.position = positionTmp;
 			break;
-			case 'lineHeight':
-			case 'colWidth':
-				this[attr] = newValue;
+			case 'line-height':
+				this['lineHeight'] = newValue;
+			break;
+			case 'col-width':
+				this['colWidth'] = newValue;
 			break;
 		}
 	}
@@ -332,7 +348,7 @@ export class MaskHighlighter extends HTMLElement {
 	}
 
 	/**
-	 * Validate the nbLines attribute of the position attribute
+	 * Validate the nb-lines attribute of the position attribute
 	 * @param {Position} position
 	 */
 	_validateHeightFromPosition(position) {
@@ -348,7 +364,7 @@ export class MaskHighlighter extends HTMLElement {
 	}
 
 	/**
-	 * Validate the nbCols attribute of the position attribute
+	 * Validate the nb-cols attribute of the position attribute
 	 * @param {Position} position
 	 */
 	_validateWidthFromPosition(position) {
