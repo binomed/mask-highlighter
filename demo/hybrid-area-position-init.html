@@ -32,15 +32,16 @@
 	<script type="text/javascript">
 	(() =>{
 		const mask = document.querySelector('mask-highlighter');
-		setTimeout(function() {
+		mask.position = {
+			line: 2,
+			nbLines: 3,
+			topMargin: '100px'
+		};
 
-			mask.area = {
-				width: '100px',
-				height: '100px',
-				top: '50px',
-				left: '50px'
-			};
-		}, 1000);
+		mask.area = {
+			left: '100px',
+			width: '200px'
+		}
 	})();
 	</script>
 
