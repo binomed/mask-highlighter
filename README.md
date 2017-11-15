@@ -1,4 +1,3 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jefBinomed/mask-highlighter)
 # MaskHighlighter
 
 > A webcomponent to show a mask over content to highlight. The content to highlight is in a rectangle.
@@ -7,24 +6,9 @@
 
 ## Doc & demo
 
-[https://github.com/binomed/mask-highlighter](https://github.com/binomed/mask-highlighter)
+[https://github.com/binomed/mask-highlighter](https://github.com/binomed/mask-highlighter/tree/master/demo)
 
 
-
-<!--
-```
-<custom-element-demo>
-  <template>
-    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <script type="module">
-  		import {html, render} from 'https://unpkg.com/lit-html@0.7.1/lib/lit-extended.js';
- 	</script>
-	<script type="module" src="mask-highlighter.js"></script>
-    <mask-highlighter top="5px" left="5px" width="10px" height="10px"></mask-highlighter>
-  </template>
-</custom-element-demo>
-```
--->
 ```html
 <mask-highlighter
 	top="5px"
