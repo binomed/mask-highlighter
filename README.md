@@ -26,7 +26,7 @@ Install it using npm as ES6 Module
 $ npm install mask-highlighter --save
 ```
 
-or download zip
+or download [zip](https://github.com/binomed/mask-highlighter/archive/1.0.0.zip)
 
 ## Usage
 
