@@ -1,6 +1,6 @@
 {
   "name": "mask-highlighter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic WebComponent for highlighting parts through a mask",
   "main": "mask-highlighter.js",
   "scripts": {

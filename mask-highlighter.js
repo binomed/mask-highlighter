@@ -1,4 +1,4 @@
-import {html, render} from './node_modules/lit-html/lit-html.js';
+import {html, render} from '../lit-html/lit-html.js';
 /**
  * @typedef {Object} Area
  * @property {string} height : the height of rectangle
