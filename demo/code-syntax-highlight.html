@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Basic Mask Demo</title>
+	<script type="module" src="../node_modules/mask-highlighter/mask-highlighter.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/agate.min.css" />
+	<style>
+		html, body{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #333;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		mask-highlighter{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
+
+		pre{
+			position:absolute;
+			top:100px;
+		}
+	</style>
+</head>
+<body>
+
+
+	<pre>
+		<code class="javascript">
+			class MySuperClass{
+				constructor(){
+
+				}
+
+				get value(){ return this._value}
+
+				set value(val){this._value = val}
+			}
+	</code>
+</pre>
+
+	<mask-highlighter></mask-highlighter>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script type="text/javascript">
+	(() =>{
+
+		function initMask(){
+
+			const TOP_MARGIN = '150px';
+			const LEFT_MARGIN = '165px';
+
+			const mask = document.querySelector('mask-highlighter');
+
+			const position1 = {
+				line: 0,
+				nbLines: 1,
+				col: 0,
+				nbCols: 5,
+				topMargin: `${TOP_MARGIN}`,
+				leftMargin: `${LEFT_MARGIN}`
+			};
+
+			const position2 = {
+				line: 2,
+				nbLines: 3,
+				col: 3,
+				nbCols: 3,
+				topMargin: `${TOP_MARGIN}`,
+				leftMargin: `${LEFT_MARGIN}`
+			};
+
+			const position3 = {
+				line: 5,
+				nbLines: 3,
+				col: 3,
+				nbCols: 8,
+				topMargin: `${TOP_MARGIN}`,
+				leftMargin: `${LEFT_MARGIN}`
+			};
+
+
+			mask.position1 = position1;
+
+			let index = 0;
+
+			setInterval(()=>{
+				switch(index%3){
+					case 0:
+						mask.position = position1;
+						break;
+					case 1:
+						mask.position = position2;
+						break;
+					case 2:
+						mask.position = position3;
+						break;
+				}
+				index++;
+			},1000);
+		}
+
+		setTimeout(() => {
+			initMask();
+		}, 500);
+
+	})();
+	</script>
+
+</body>
+</html>
