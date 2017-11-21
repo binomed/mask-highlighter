@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Basic Mask Demo</title>
+	<script type="module" src="../mask-highlighter.js"></script>
+	<style>
+		html, body{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: #CCC;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		mask-highlighter{
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+
+
+	<mask-highlighter></mask-highlighter>
+
+	<script type="text/javascript">
+	(() =>{
+		const mask = document.querySelector('mask-highlighter');
+		mask.position = {
+			col: 2,
+			nbCols: 10,
+			line: 2,
+			nbLines: 3,
+			topMargin: '100px',
+			leftMargin: '100px'
+		};
+
+		mask.lineHeight = '2em';
+		mask.colWidth = '20px';
+	})();
+	</script>
+
+</body>
+</html>
