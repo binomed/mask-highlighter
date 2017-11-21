@@ -1,0 +1,27 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	min-height: 100%;
+	min-width: 100%; }
+
+.mdl-layout__header-row img {
+	max-height: 90%;
+	margin-right: 20px;
+	left: -50px;
+	position: relative;
+}
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}

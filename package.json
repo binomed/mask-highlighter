@@ -1,11 +1,7 @@
 {
-  "name": "mask-highlighter",
+  "name": "mask-highlighter-demo",
   "version": "1.0.1",
-  "description": "Basic WebComponent for highlighting parts through a mask",
-  "main": "mask-highlighter.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Basic demo page for WebComponent for highlighting parts through a mask",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/binomed/mask-highlighter.git"
@@ -23,6 +19,6 @@
   },
   "homepage": "https://github.com/binomed/mask-highlighter#readme",
   "dependencies": {
-    "lit-html": "^0.7.1"
+    "mask-highlighter": "^1.0.1"
   }
 }

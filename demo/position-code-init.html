@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Basic Mask Demo</title>
-	<script type="module" src="../mask-highlighter.js"></script>
+	<script type="module" src="../node_modules/mask-highlighter/mask-highlighter.js"></script>
 	<style>
 		html, body{
 			position: absolute;
@@ -32,6 +32,8 @@
 	<script type="text/javascript">
 	(() =>{
 		const mask = document.querySelector('mask-highlighter');
+		setTimeout(() => {
+
 		mask.position = {
 			col: 2,
 			nbCols: 10,
@@ -43,6 +45,7 @@
 
 		mask.lineHeight = '2em';
 		mask.colWidth = '20px';
+		}, 500);
 	})();
 	</script>
 
