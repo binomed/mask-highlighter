@@ -6,7 +6,8 @@
 
 ## Doc & demo
 
-[https://github.com/binomed/mask-highlighter](https://github.com/binomed/mask-highlighter/tree/master/demo)
+[https://jef.binomed.fr/mask-highlighter/](https://jef.binomed.fr/mask-highlighter/)
+
 
 
 ```html
